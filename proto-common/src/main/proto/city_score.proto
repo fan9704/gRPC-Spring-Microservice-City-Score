@@ -1,6 +1,8 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
 
 package cityscore;
 
@@ -25,7 +27,25 @@ message CityScoreExceptionResponse {
   CityScoreErrorCode error_code = 2;
 }
 
+message ListCityScoresResponse {
+  repeated CityScoreResponse city_scores = 1;
+}
+
+message PatchCityScoreRequest {
+  int32 city_code = 1;
+  google.protobuf.FieldMask update_mask = 2;
+  CityScoreRequest city_score = 3;
+}
 service CityScoreService {
   // unary
   rpc calculateCityScore(CityScoreRequest) returns (CityScoreResponse) {};
+
+  rpc createCityScore(CityScoreRequest) returns (CityScoreResponse) {}
+  rpc getCityScore(CityScoreRequest) returns (CityScoreResponse) {}
+  rpc updateCityScore(CityScoreRequest) returns (CityScoreResponse) {}
+  rpc deleteCityScore(CityScoreRequest) returns (google.protobuf.Empty) {}
+  rpc listCityScores(google.protobuf.Empty) returns (ListCityScoresResponse) {}
+  rpc patchCityScore(PatchCityScoreRequest) returns (CityScoreResponse) {}
+
+
 }

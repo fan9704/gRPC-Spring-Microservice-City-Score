@@ -15,7 +15,92 @@ public class CityScoreService extends CityScoreServiceGrpc.CityScoreServiceImplB
 
     @Override
     public void calculateCityScore(CityScoreRequest request, StreamObserver<CityScoreResponse> responseObserver) {
-        // System.out.println("Request received from client:\n" + request);
+         System.out.println("Request received from client:\n" + request);
+
+        validationService.validateCityCode(request.getCityCode());
+
+        Integer cityScore = request.getCityCode() * 10;
+
+        CityScoreResponse response = CityScoreResponse.newBuilder()
+                .setCityScore(cityScore)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+
+    public void  getCityScore(CityScoreRequest request, StreamObserver<CityScoreResponse> responseObserver) {
+        System.out.println("Request received from client:\n" + request);
+
+        validationService.validateCityCode(request.getCityCode());
+
+        Integer cityScore = request.getCityCode() * 10;
+
+        CityScoreResponse response = CityScoreResponse.newBuilder()
+                .setCityScore(cityScore)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+    public void createCityScore(CityScoreRequest request, StreamObserver<CityScoreResponse> responseObserver) {
+        System.out.println("Request received from client:\n" + request);
+
+        validationService.validateCityCode(request.getCityCode());
+
+        Integer cityScore = request.getCityCode() * 10;
+
+        CityScoreResponse response = CityScoreResponse.newBuilder()
+                .setCityScore(cityScore)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+    public void updateCityScore(CityScoreRequest request, StreamObserver<CityScoreResponse> responseObserver) {
+        System.out.println("Request received from client:\n" + request);
+
+        validationService.validateCityCode(request.getCityCode());
+
+        Integer cityScore = request.getCityCode() * 10;
+
+        CityScoreResponse response = CityScoreResponse.newBuilder()
+                .setCityScore(cityScore)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+    public void deleteCityScore(CityScoreRequest request, StreamObserver<CityScoreResponse> responseObserver) {
+        System.out.println("Request received from client:\n" + request);
+
+        validationService.validateCityCode(request.getCityCode());
+
+        Integer cityScore = request.getCityCode() * 10;
+
+        CityScoreResponse response = CityScoreResponse.newBuilder()
+                .setCityScore(cityScore)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+    public void listCityScore(CityScoreRequest request, StreamObserver<CityScoreResponse> responseObserver) {
+        System.out.println("Request received from client:\n" + request);
+
+        validationService.validateCityCode(request.getCityCode());
+
+        Integer cityScore = request.getCityCode() * 10;
+
+        CityScoreResponse response = CityScoreResponse.newBuilder()
+                .setCityScore(cityScore)
+                .build();
+
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
+    }
+    public void patchCityScore(CityScoreRequest request, StreamObserver<CityScoreResponse> responseObserver) {
+        System.out.println("Request received from client:\n" + request);
 
         validationService.validateCityCode(request.getCityCode());
 
