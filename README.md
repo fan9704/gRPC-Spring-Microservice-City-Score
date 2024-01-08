@@ -1,12 +1,14 @@
 # A Sample Spring Boot Microservices Project with gRPC
 This is a sample microservices project developed with Spring Boot and gRPC, using Java version 16.
 
-<img src="https://img.shields.io/badge/Language-Java-orange.svg">
+<img src="https://img.shields.io/badge/Language-Java-orange.svg" alt="">
 
 ## Submodules:
 - City Score
     - It calculates a city score value.
     - Request parameter uses a custom "ValidCityCode" validation.
+    - **Port: 8080**
+    - **gRPC Port: 8000**
 
 - Score Segment
     - It calculates a score segment value.
@@ -15,6 +17,11 @@ This is a sample microservices project developed with Spring Boot and gRPC, usin
 - Score Calculator
     - It calls CityScore and Score Segment services to calculate a final score.
     - H2 is used for database implementation.
+- Admin Service
+    - It is used for monitoring the services.
+    - **Port: 9003*
+- Config Server
+    - **Port: 9010**  
 
 ## Usage
 To test score service API call, you can perform a cURL request (or import it to Postman):
