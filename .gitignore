@@ -49,3 +49,9 @@ log/
 
 ### env ###
 .env
+
+### Postgres ###
+/pgdata/**
+
+### Vault ###
+/vault/**
