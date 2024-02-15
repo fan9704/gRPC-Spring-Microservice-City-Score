@@ -1,0 +1,61 @@
+version: '3.3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.9.10-management
+    hostname: rabbitmq
+    container_name: rabbitmq
+    env_file:
+      - .env
+    environment:
+      - RABBITMQ_DEFAULT_VHOST=/
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "1883:1883"
+      - "61613:61613"
+      - "15674:15674"
+      - "15675:15675"
+  db:
+    image: postgres:13.2-alpine
+    restart: always
+    container_name: spring-postgres
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: spring-pgAdmin
+    restart: always
+    env_file:
+      - .env
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+    ports:
+      - "9101:80"
+    links:
+      - "db:pgsql-server"
+  vault:
+    image: vault:1.13.3
+    container_name: vault-server
+    ports:
+      - "8200:8200"
+    restart: always
+    volumes:
+      - ./vault/logs:/vault/logs
+      - ./vault/file:/vault/file
+      - ./vault/config:/vault/config
+    cap_add:
+      - IPC_LOCK
+    entrypoint: vault server -config=./vault/config/vault.json
